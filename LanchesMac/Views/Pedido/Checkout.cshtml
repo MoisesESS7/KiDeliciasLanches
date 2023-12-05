@@ -1,0 +1,19 @@
+﻿@model Pedido
+
+<div class="card text-white" style="padding:10px; background-color: #192023">
+    <h3>Você está a um passo de concluir seu pedido!</h3>
+    <div class="card" style="padding:10px; border-color:white; background-color: #192023">
+        <form asp-action="Checkout" method="post" class="form-horizontal" role="form">
+            <partial name="_FormularioPedido"/>
+            <br />
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <input class="btn btn-outline-success" type="submit" value="Incluir pedido" />
+                </div>
+                <div class="text-end form-group col-md-6">
+                    <a class="btn btn-outline-info" asp-controller="CarrinhoCompra" asp-action="Index">Retornar ao carrinho</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

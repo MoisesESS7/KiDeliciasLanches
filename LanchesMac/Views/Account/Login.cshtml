@@ -1,0 +1,44 @@
+﻿@model LoginViewModel
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 text-end">
+            <img src="~/Imagens/logincor.png" alt="Fazer o login" class="center-block img-fluid" style="width:150px" />
+        </div>
+        <div class="col-6 col-md-6 col-lg-6">
+            <table class=" table rounded-3" style="background-color: #192023; color:white">
+                <tr>
+                    <td>
+                        <div>
+                            <h3 class="text-center">Login</h3>
+                            <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal">
+                                <hr />
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <input type="hidden" asp-for="ReturnUrl" />
+                                <div class="form-group">
+                                    <label asp-for="UserName" class="col-md-2 control-label"></label>
+                                    <div>
+                                        <input asp-for="UserName" class="form-control" placeholder="name@example.com" />
+                                        <span asp-validation-for="UserName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Password" class="col-md-2 control-label"></label>
+                                    <div>
+                                        <input asp-for="Password" class="form-control" placeholder="Senha" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                        <p>Sua senha deve ter de 6 a 20 caracteres, conter letras e números e não deve conter espaços, caracteres especiais ou emojis.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <input type="submit" class="btn btn-success" value="Log in" />
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model Categoria
+
+@{
+    ViewData["Title"] = "Criar Categoria";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-sm-4 col-md4 col-lg-4 card text-white" style="background-color:#192023; padding:10px">
+            <h3 class="text-center">Criar Categoria</h3>
+            <div class="card" style="padding:10px; border-color:white; background-color: #192023">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="CategoriaNome" class="control-label"></label>
+                        <input asp-for="CategoriaNome" class="form-control" placeholder="Nome da Categoria" />
+                        <span asp-validation-for="CategoriaNome" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Descricao" class="control-label"></label>
+                        <textarea asp-for="Descricao" class="form-control" placeholder="Descrever Categoria..."></textarea>
+                        <span asp-validation-for="Descricao" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <p class="border-bottom" style="color:white"></p>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <input type="submit" value="Criar" class="btn btn-outline-primary" />
+                        </div>
+                        <div class="col-6 text-end">
+                            <a asp-action="Index" class="btn btn-outline-info">Retornar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

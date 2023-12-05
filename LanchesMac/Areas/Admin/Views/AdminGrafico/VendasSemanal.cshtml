@@ -1,0 +1,101 @@
+﻿<title>
+    @ViewData["Title"] - Grafico de Vendas
+</title>
+
+<link rel="stylesheet" href="~/css/Grafico.css" />
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<div class="container-fluid">
+    <div class="row">
+        <div id="chart_div"></div>
+        <div id="overlay" style="display: none;"></div>
+        <div id="message-container" style="display: none;">
+            <div id="message-box">
+                <h4 id="message-text">Não há vendas disponíveis</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(CarregaDados);
+
+    function CarregaDados() {
+        $.ajax({
+            url: '@Url.Action("VendasLanches", "AdminGrafico")',
+            data: { dias: 7 },
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                if (data.length > 0) {
+                    GraficoVendasLanches(data);
+                } else {
+                    MostrarMensagemSemVendas();
+                }
+            }
+        });
+    }
+
+    function GraficoVendasLanches(data) {
+        var dataArray = [
+            ['Lanche', 'Quantidade', 'Valores(R$)']
+        ];
+        $.each(data, function (i, item) {
+            var quantidade = parseInt(item.lancheQuantidade);
+            var valorTotal = parseFloat(item.lanchesValorTotal);
+            dataArray.push([item.lancheNome, quantidade, valorTotal]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Lanches - Vendas nos últimos 7 dias',
+            chartArea: {
+                width: '80%'
+            },
+            legend: {
+                position: 'top',
+                alignment: 'end'
+            },
+            animation: {
+                duration: 3000,
+                easing: 'out',
+                startup: true
+            },
+            colors: ['#5202b5', '#d2a828'],
+            hAxis: {
+                title: 'Valor Total (em Reais)',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Lanches'
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+    function MostrarMensagemSemVendas() {
+        var overlay = document.getElementById('overlay');
+        overlay.style.display = 'block';
+
+        overlay.addEventListener('click', function () {
+            overlay.style.display = 'none';
+            var messageContainer = document.getElementById('message-container');
+            messageContainer.style.display = 'none';
+        });
+
+        var messageContainer = document.getElementById('message-container');
+        messageContainer.style.display = 'flex';
+
+        var messageBox = document.getElementById('message-box');
+        messageBox.style.display = 'block';
+
+        var messageText = document.getElementById('message-text');
+        messageText.innerHTML = 'Não há dados de vendas para gerar o Gráfico!';
+    }
+</script>

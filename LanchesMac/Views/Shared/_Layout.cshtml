@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KiDeliciasLanches</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LanchesMac.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/LimparCarrinho.css" />
+    <link rel="stylesheet" href="~/css/AreaUsuarioFundo.css" />
+</head>
+<body>
+    <header>
+        <nav class="fixed-top navbar navbar-expand-lg navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-4">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                            <img src="~/imagens/logo_lanche2-removebg-preview.png" class="img-fluid" />
+                            KiDeliciasLanches
+                        </a>
+                    </div>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                &nbsp;
+                <div class="container-fluid navbar-collapse collapse d-sm-inline-flex d-md-inline-flex d-lg-inline-flex flex-sm-row">
+
+                    <a class="btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <a class="btn btn-outline-light" asp-area="" asp-controller="Contato" asp-action="Index">Contato</a>                    
+                    @await Component.InvokeAsync("CategoriaMenu")
+                    <form class="navbar-form navbar-right" asp-controller="Lanche" asp-action="Search" method="get">
+                        <div class="form-group">
+                            <input type="text" style="min-width: 88px" class="form-control btn btn-outline-light" placeholder="Procurar produto" name="searchString" value="@ViewData["searcString"]" />
+                        </div>
+                    </form>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-outline-light" asp-area="Admin" asp-controller="Admin" asp-action="Index">Admin</a>
+                    }
+                    @await Html.PartialAsync("_LoginPartial")
+                    @await Component.InvokeAsync("CarrinhoCompraResumo")
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container" style="padding-top: 100px">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer>
+        <partial name="_Footer" />
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="~/js/Mascara.js"></script>
+    <script src="~/js/CepPedido.js"></script>
+</body>
+</html>

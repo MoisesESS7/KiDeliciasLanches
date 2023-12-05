@@ -1,0 +1,121 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<Pedido>
+
+@{
+    ViewData["Title"] = "Pedidos";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="card text-white" style="background-color:#192023; padding:10px; width:100%">
+            <h3>Pedidos</h3>
+            <form method="get" class="form-inline">
+                <div class="col-sm-4">
+                    <input name="filter" class="form-control" placeholder="Buscar Pedido"
+                           value="@Model.RouteValue["Filter"]" />
+                </div>
+                <div style="padding-top:10px">
+                    <button type="submit" class="btn btn-outline-info">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar
+                    </button>
+                </div>
+            </form>
+            &nbsp;
+            <div>
+                Total de Pedidos : @Model.TotalRecordCount
+                <vc:pager paging-list="@Model"></vc:pager>
+            </div>
+            <p>
+                <a asp-action="Create" class="btn btn-outline-primary">Criar Pedido</a>
+            </p>
+            <br />
+            <div style="overflow-x: auto;">
+                <table class="table table-striped table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nome)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SobreNome)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Endereco1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Endereco2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Cep)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Estado)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Cidade)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Telefone)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th class="text-truncate">
+                                @Html.DisplayNameFor(model => model.PedidoEnviado)
+                            </th>
+                            <th class="text-truncate">
+                                @Html.DisplayNameFor(model => model.PedidoEntregueEm)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="text-truncate">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SobreNome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Endereco1)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Endereco2)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cep)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Estado)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cidade)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Telefone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PedidoEnviado)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PedidoEntregueEm)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.PedidoId" class="text-warning">Editar</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.PedidoId" class="text-danger">Deletar</a> |
+                                    <a asp-action="Details" asp-route-id="@item.PedidoId" class="text-primary">Detalhes</a> |                                    
+                                    <a asp-action="ItensPedido" asp-route-id="@item.PedidoId" class="text-success">Itens</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

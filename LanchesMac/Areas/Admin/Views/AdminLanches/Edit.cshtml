@@ -1,0 +1,83 @@
+﻿@model Lanche
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="card text-white" style="padding:10px; background-color: #192023">
+    <h3>Editar Produto</h3>
+    <div class="card" style="padding:10px; border-color:white; background-color: #192023">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="LancheId" />
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" placeholder="Nome do Produto" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescricaoCurta" class="control-label"></label>
+                <textarea asp-for="DescricaoCurta" class="form-control" placeholder="Descreva o Produto..."></textarea>
+                <span asp-validation-for="DescricaoCurta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescricaoDetalhada" class="control-label"></label>
+                <textarea asp-for="DescricaoDetalhada" class="form-control" placeholder="Descreva com mais detalhes..."></textarea>
+                <span asp-validation-for="DescricaoDetalhada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preco" class="control-label"></label>
+                <input asp-for="Preco" class="form-control" placeholder="R$: 00,00" id="precoProduto" />
+                <span asp-validation-for="Preco" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="ImagemUrl" class="control-label"></label>
+                    <input asp-for="ImagemUrl" class="form-control" placeholder="C:/exemplo1/exemplo2/.../arquivo.jpg" />
+                    <span asp-validation-for="ImagemUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <img src="@Model.ImagemUrl" style="padding-top:8px" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagemThumbnailUrl" class="control-label"></label>
+                <input asp-for="ImagemThumbnailUrl" class="form-control" placeholder="C:/exemplo1/exemplo2/.../arquivo.jpg" />
+                <span asp-validation-for="ImagemThumbnailUrl" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <label class="control-label">Marcar como Preferido?</label>
+                    <br />
+                    <label class="form-check-label" style="padding-left: 20px">
+                        <input class="form-check-input" asp-for="IsLanchePreferido" /> @Html.DisplayNameFor(model => model.IsLanchePreferido)
+                    </label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label class="control-label">Marcar como em Estoque?</label>
+                    <br />
+                    <label class="form-check-label" style="padding-left: 20px">
+                        <input class="form-check-input" asp-for="EmEstoque" /> @Html.DisplayNameFor(model => model.EmEstoque)
+                    </label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label asp-for="CategoriaId" class="control-label"></label>
+                    <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId" ></select>
+                    <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <p class="border-bottom" style="color:white"></p>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <input type="submit" value="Salvar" class="btn btn-outline-primary" />
+                </div>
+                <div class="text-end form-group col-md-6">
+                    <a asp-action="Index" class="btn btn-outline-info">Retornar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

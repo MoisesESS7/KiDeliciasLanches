@@ -1,0 +1,6 @@
+﻿
+/*imagem de fundo da área de administração*/
+body {
+    background-image: url("/Imagens/adminFundo.png");
+    background-size: 135px;
+}

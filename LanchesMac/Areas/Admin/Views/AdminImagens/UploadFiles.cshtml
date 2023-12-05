@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "UploadFiles";
+}
+
+<div class="card" style="background-color: black; padding:5px">
+    <div class="card" style="background-color: white; padding:10px">
+        <img src="~/Imagens/upload2.png" width="200" height="150" class="img-fluid"/>
+        <hr />
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                @if (ViewData["Error"] != null)
+                {
+                    <img src="~/Imagens/erro1.png" width="150" height="150" class="img-fluid"/>
+                    <h4>@ViewData["Error"]</h4>
+                }
+            </div>
+            <div class="container">
+                <div class="row">
+                    @if (ViewData["Resultado"] != null)
+                    {
+                        <h4>@ViewData["Resultado"]</h4>
+                        <hr />
+                        @if (ViewBag.Arquivos != null)
+                        {
+                            <ul>
+                                @foreach (string arquivo in ViewBag.Arquivos)
+                                {
+                                    <li>
+                                        @arquivo
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="background-color: white; padding:10px; margin-top: 5px">
+        <div class="row text-center">
+            <a asp-action="Index" class="text-info"><h3>Voltar</h3></a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@model Pedido
+
+@{
+    ViewData["Title"] = "Criar Pedido";
+    @ViewBag.TotalItensPedidos
+}
+
+<div class="card text-white" style="padding:10px; background-color: #192023">
+    <h3>Criar Pedido</h3>
+    <div class="card" style="padding:10px; border-color:white; background-color: #192023">
+        <form asp-action="Create" method="post" class="form-horizontal" role="form">
+            <partial name="_FormularioPedido" />
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="PedidoEnviado" class="control-label"></label>
+                    <input asp-for="PedidoEnviado" class="form-control" placeholder="DD/MM/AAAA 00:00" id="PedidoEnviado" />
+                    <span asp-validation-for="PedidoEnviado" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="PedidoEntregueEm" class="control-label"></label>
+                    <input asp-for="PedidoEntregueEm" class="form-control" placeholder="DD/MM/AAAA 00:00" id="PedidoEntregueEm" />
+                    <span asp-validation-for="PedidoEntregueEm" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <p class="border-bottom" style="color:white"></p>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <input class="btn btn-outline-success" type="submit" value="Criar Pedido" />
+                </div>
+                <div class="text-end form-group col-md-6">
+                    <a class="btn btn-outline-info" asp-action="Index">Retornar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

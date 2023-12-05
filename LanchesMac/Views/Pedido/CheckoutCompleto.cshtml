@@ -1,0 +1,71 @@
+﻿@model Pedido
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="card text-white" style="padding-bottom:10px; padding-top:10px; background-color:#192023">            
+            <div class="col-5">
+                <div class="row">
+                    <div class="col-1">
+                        <img src="~/imagens/visto.png" class="img-fluid" style="padding-bottom:8px; max-width:50px; max-height:50px" />
+                    </div>
+                    <div class="col-10" style="margin-left:10px">
+                        <h3>@ViewBag.CheckoutCompletoMensagem</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="background-color:#192023">
+                <div class="card-body border" style="color:white">
+                    <p>Cliente: <strong>@Model.Nome @Model.SobreNome</strong></p>
+                    <p>Data do pedido: <strong>@Model.PedidoEnviado</strong></p>
+                    <p class="border-bottom" style="color:white">
+                        Número do Pedido: <strong>@Model.PedidoId</strong>
+                    </p>
+                    <br />
+                    <div style="overflow-x: auto;">
+                        <table class="table table-striped table-hover table-dark">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Quantidade</th>
+                                    <th>Lanche</th>
+                                    <th class="text-end">Preço</th>
+                                    <th class="text-end" style="padding-right:10px">SubTotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.PedidoItens)
+                                {
+                                    <tr>
+                                        <td><img src="@item.Lanche.ImagemUrl" class="img-fluid" style="max-width:40px; max-height:40px" /></td>
+                                        <td>@item.Quantidade</td>
+                                        <td>@item.Lanche.Nome</td>
+                                        <td class="text-end">@item.Lanche.Preco</td>
+                                        <td class="text-end" style="padding-right:10px">@((item.Quantidade * item.Lanche.Preco).ToString("c"))</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr class="text-start">
+                                    <td class="text-end" colspan="4">
+                                        <b>Valor Total: </b>
+                                    </td>
+                                    <td class="text-end" style="padding-right:10px">
+                                        <b>@(((decimal)ViewBag.TotalPedido).ToString("C2"))</b>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="card-footer border" style="background-color:#192023; color:white">
+                <div class="form-group" style="text-align: center">
+                    <h3>
+                        <a class="nav-link text-info" asp-controller="Home" asp-action="Index">Retornar</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

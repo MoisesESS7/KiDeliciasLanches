@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Pedido>
+
+<div class="container-fluid">
+    <div class="card text-white" style="background-color:#192023; padding:10px">
+        <h3>Pedidos Por Períodos</h3>
+        <div class="card" style="padding:10px; border-color:white; background-color: #192023">
+            <div style="overflow-x: auto;">
+                <nav class="navbar navbar-dark">
+                    <form class="navbar-fomr navbar-laft">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="minDate">Data Inicial</label>
+                                <input type="date" class="form-control" name="minDate" value="@ViewData["minDate"]" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-group">Data Final</label>
+                                <input type="date" class="form-control" name="maxDate" value="@ViewData["maxDate"]" />
+                            </div>
+                            <br />
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary">Filtrar</button>
+                    </form>
+                </nav>
+            </div>
+            <br />
+            <p class="border-bottom" style="color:white"></p>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Total de Pedidos = @Model.Count()</h5>
+                    <h5 class="panel-title">Total de Lanches nos Pedidos = @Model.Sum(obj => obj.TotalItensPedidos).ToString()</h5>
+                    <h5 class="panel-title">Valor dos Pedidos = @Model.Sum(obj => obj.PedidoTotal).ToString("c")</h5>
+                </div>
+                <br />
+                <div class="panel-body">
+                    <div style="overflow-x: auto;">
+                        <table class="table table-striped table-hover table-dark">
+                            <thead>
+                                <tr class="success" align="center">
+                                    <th>@Html.DisplayNameFor(model => model.PedidoId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Nome)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Email)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Telefone)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PedidoTotal)</th>
+                                    <th>@Html.DisplayNameFor(model => model.TotalItensPedidos)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PedidoEntregueEm)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr align="center">
+                                        <td>@Html.DisplayFor(modelItem => item.PedidoId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Telefone)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.PedidoTotal)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TotalItensPedidos)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.PedidoEntregueEm)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
